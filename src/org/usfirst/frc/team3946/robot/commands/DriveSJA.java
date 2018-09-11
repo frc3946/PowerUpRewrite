@@ -20,7 +20,7 @@ public class DriveSJA extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.ArcadeDrive(Robot.m_oi.driverController.getY(GenericHID.Hand.kLeft), -(Robot.m_oi.driverController.getX(GenericHID.Hand.kLeft)));
+    	Robot.drivetrain.ArcadeDrive(Robot.m_oi.driverStick.getY(), Robot.m_oi.driverStick.getX());
 
     }
 

@@ -2,14 +2,12 @@ package org.usfirst.frc.team3946.robot.subsystems;
 
 import org.usfirst.frc.team3946.robot.Robot;
 import org.usfirst.frc.team3946.robot.RobotMap;
-import org.usfirst.frc.team3946.robot.commands.IntakePos;
-import org.usfirst.frc.team3946.robot.commands.IntakeStop;
+import org.usfirst.frc.team3946.robot.commands.IntakeMotorOff;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -56,6 +54,6 @@ public class Intake extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
-    	setDefaultCommand(new IntakeStop());
+    	setDefaultCommand(new IntakeMotorOff());
     }
 }

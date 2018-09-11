@@ -7,21 +7,17 @@
 
 package org.usfirst.frc.team3946.robot;
 
+import org.usfirst.frc.team3946.lowpowercommands.CubeInLow;
+import org.usfirst.frc.team3946.lowpowercommands.CubeOutLow;
 import org.usfirst.frc.team3946.robot.commands.Intake45Deg;
-import org.usfirst.frc.team3946.robot.commands.IntakeClose;
 import org.usfirst.frc.team3946.robot.commands.IntakeCubeIn;
 import org.usfirst.frc.team3946.robot.commands.IntakeCubeOut;
-import org.usfirst.frc.team3946.robot.commands.IntakeOpen;
 import org.usfirst.frc.team3946.robot.commands.IntakePos;
-import org.usfirst.frc.team3946.robot.commands.IntakeStop;
-import org.usfirst.frc.team3946.robot.commands.TwistyCubeyMove;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-
-import XboxLibrary.XboxControllerMap;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -31,23 +27,32 @@ public class OI {
 	public Joystick leftStick = new Joystick(RobotMap.leftJoystick);
 	public Joystick rightStick = new Joystick(RobotMap.rightJoystick);
 	public XboxController driverController = new XboxController(RobotMap.driverController);
+	public XboxController lowPowerController = new XboxController(RobotMap.lowPowerController);
+	public Joystick driverStick = new Joystick(4);
 
-//	Button intakeOpen = new JoystickButton(driverController, 5);
-//	Button intakeClose = new JoystickButton(driverController, 6);
+	Button cubeOut = new JoystickButton(driverController, 1);
+	Button cubeIn = new JoystickButton(driverController, 2);
 	Button intake45 = new JoystickButton(driverController, 3);
 	Button intake0 = new JoystickButton(driverController, 4);
-	Button cubeIn = new JoystickButton(driverController, 2);
-	Button cubeOut = new JoystickButton(driverController, 1);
-	Button twistCube = new JoystickButton(driverController, 5);
-	public OI() {
-		
+	Button cubeInLow = new JoystickButton(driverController, 5);
+	Button cubeOutLow = new JoystickButton(driverController, 6);
+	
+	Button cubeInJoy = new JoystickButton(leftStick, 1);
+	Button cubeOutJoy = new JoystickButton(leftStick, 2);
+	Button intake45Joy = new JoystickButton(leftStick, 4);
+	Button intake0Joy = new JoystickButton(leftStick, 5);
+	
+	public OI() {		
 		cubeIn.whileHeld(new IntakeCubeIn());
 		cubeOut.whileHeld(new IntakeCubeOut());
-//		intakeOpen.whenPressed(new IntakeOpen());
-//		intakeClose.whenPressed(new IntakeClose());
 		intake45.whenPressed(new Intake45Deg());
 		intake0.whenPressed(new IntakePos());
-		twistCube.whileHeld(new TwistyCubeyMove());
+		cubeInLow.whileHeld(new CubeInLow());
+		cubeOutLow.whileHeld(new CubeOutLow());
 		
+		cubeInJoy.whileHeld(new IntakeCubeIn());
+		cubeOutJoy.whileHeld(new IntakeCubeOut());
+		intake45Joy.whenPressed(new Intake45Deg());
+		intake0Joy.whenPressed(new IntakePos());
 	}
 }

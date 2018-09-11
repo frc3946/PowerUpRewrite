@@ -23,12 +23,13 @@ public class RobotMap {
 		public static int frontRight = 2;
 		public static int backLeft =3;
 		public static int backRight = 4;
-		public static int gyro = 1;
+		public static int gyro = 0;
 
 		//Operator Interface
 		public static int leftJoystick = 0;
 		public static int rightJoystick = 1;
 		public static int driverController = 2;
+		public static int lowPowerController = 3;
 		
 		//Intake
 		public static int sparkIntakeMotor1 = 1;

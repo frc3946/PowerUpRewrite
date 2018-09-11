@@ -7,18 +7,19 @@
 
 package org.usfirst.frc.team3946.robot;
 
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team3946.robot.commands.AutoStraight;
-import org.usfirst.frc.team3946.robot.commands.Autonomous;
+import org.usfirst.frc.team3946.robot.autocommands.AutoMiddleLeft;
+import org.usfirst.frc.team3946.robot.autocommands.AutoMiddleRight;
+import org.usfirst.frc.team3946.robot.autocommands.AutoStraight;
+import org.usfirst.frc.team3946.robot.autocommands.Autonomous;
 import org.usfirst.frc.team3946.robot.commands.DemoDrive;
-import org.usfirst.frc.team3946.robot.commands.DriveDJA;
 import org.usfirst.frc.team3946.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team3946.robot.subsystems.Intake;
 
@@ -44,11 +45,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
-		CameraServer.getInstance().startAutomaticCapture();
 		SmartDashboard.putData("Demo Drive (Nerf Mode)", new DemoDrive());
-		SmartDashboard.putData("Arcade Drive", new DriveDJA());
 	}
 
 	/**
@@ -61,6 +59,7 @@ public class Robot extends TimedRobot {
 
 	}
 
+	
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
@@ -79,13 +78,25 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+
+//		m_autonomousCommand.start();
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		if(gameData.charAt(0) == 'R') {
+		if(gameData.charAt(0) == 'L') {
 			m_autonomousCommand = new Autonomous();
 		} else {
 			m_autonomousCommand = new AutoStraight();
 		}
+		
+		/*
+		 * You NEED to talk to other alliance about their auto commands and choose two of the following
+		 * to work with them and they must be put into the if/else statement above:
+		 * Place Left Side, Behind Switch or Place Left Side, Right Side Switch
+		 * Place Right Side, Behind Switch or Place Right Side, Left Side Switch
+		 * Drive Straight any where
+		 * Left Side Front of Switch or Right Side Front of Switch
+		 * Middle Auto to both sides ***NOT COMPLETE***
+		 */
 		
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -106,6 +117,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putString("m_chooser", m_chooser.getName());
+
 	}
 
 	@Override
@@ -125,6 +138,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("Battery Voltage", RobotController.getBatteryVoltage());
+		SmartDashboard.updateValues();
 	}
 
 	/**

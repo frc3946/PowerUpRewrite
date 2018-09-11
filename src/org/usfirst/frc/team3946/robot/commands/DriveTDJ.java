@@ -20,7 +20,7 @@ public class DriveTDJ extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.TankDrive(-(Robot.m_oi.driverController.getY(GenericHID.Hand.kLeft)), Robot.m_oi.driverController.getY(GenericHID.Hand.kRight));
+    	Robot.drivetrain.ArcadeDrive(Robot.m_oi.leftStick.getY(), -(Robot.m_oi.rightStick.getX()));
     }
 
     // Make this return true when this Command no longer needs to run execute()
